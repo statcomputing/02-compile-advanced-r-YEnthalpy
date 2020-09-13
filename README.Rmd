@@ -1,0 +1,101 @@
+---
+title: "Problems and Solutions"
+author: "Zehan Yang"
+date: "9/12/2020"
+output: pdf_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# Computing Enviornment
+1. System: Windows/Linux
+2. Programming Tool: R/Rstudio
+3. Other tools: TexLive/MikeTex
+
+# Problems and solutions
+## Problem 1
+### Description
+Error in loadNamespace(name) : there is no package called ‘bookdown’.
+### Solution
+Download package 'bookdown'.
+
+## Problem 2
+### Description
+Error in Rscript_render(f, render_args, render_meta, add1, add2): Failed to compile 'Introduction.Rmd'.
+### Solution
+I Opened the file 'Introduction.Rmd' and then found out that I need to install a required package 'dplyr'.
+
+## Problem 3
+### Description
+Error in Rscript_render(f, render_args, render_meta, add1, add2) : Failed to compile 'Names-values.Rmd'.
+### Solution
+I Opened the file 'Introduction.Rmd' and then found out that I need to install a required package 'lobstr'.
+
+## Problem 3
+### Description
+Error in Rscript_render(f, render_args, render_meta, add1, add2): Failed to compile 'R6.Rmd'.
+### Solution
+I Opened the file 'R6.Rmd' and then found out that I need to install required packages 'DBI' and 'RSQLite'.
+
+## Problem 4
+### Description
+Error in Rscript_render(f, render_args, render_meta, add1, add2): Failed to compile 'OO-tradeoffs.Rmd'.
+### Solution
+I Opened the file 'R6.Rmd' and then found out that I need to install a required package 'zeallot'.
+
+## Problem 5
+### Description
+Quitting from lines 209-221 (Big-picture.Rmd).
+Error: The dbplyr package is required to communicate with database backends.
+### Solution
+According to dplyr's documentation, as of dplyr 0.6.0, a number of databse and SQL functions moved from 'dplyr' to 'dbplyr'. Thus, I install the package 'dbplyr' and the problem solved.
+
+## Problem 6
+### Description
+Error in Rscript_render(f, render_args, render_meta, add1, add2): Failed to compile 'Perf-measure.Rmd'.
+### Solution
+I Opened the file 'Perf-measure.Rmd' and then found out that I need to install required packages 'bench' and 'profvis'.
+
+## Problem 6
+### Description
+Quitting from lines 233-234 (Perf-measure.Rmd).
+Error: `ggplot2` and `tidyr` must be installed to use `autoplot`.
+### Solution
+I Installed packages `ggplot2` and `tidyr`.
+
+## Problem 7
+### Description
+Quitting from lines 233-234 (Perf-measure.Rmd). 
+Error: `ggbeeswarm` must be installed to use `type = "beeswarm"` option.
+### Solution
+I Installed package `ggbeeswarm`.
+
+## Problem 8
+### Description
+Quitting from lines 233-234 (Perf-measure.Rmd). 
+Error: `ggbeeswarm` must be installed to use `type = "beeswarm"` option.
+### Solution
+I Installed package `ggbeeswarm`.
+
+## Problem 9
+### Description
+! Package fontspec Error: The font "Inconsolata" cannot be found.
+### Solution
+1. I installed the font in 'https://fonts.google.com/specimen/Inconsolata' and reinstall he package 'fontspec' in MikeTex but the problem still remained. I thought the problem may caused by MikeTex or Windows system. Thus, I tried two ways, one is install TexLive and another is compiling '_main.tex' in Linux system.
+2. 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
