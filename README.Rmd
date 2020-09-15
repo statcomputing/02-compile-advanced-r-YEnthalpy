@@ -10,97 +10,79 @@ knitr::opts_chunk$set(echo = TRUE)
 ```
 
 # Computing Enviornment
-1. System: Windows
+1. System: MacOS
 2. Programming Tool: R/Rstudio
-3. Other tools: TexLive/MikeTex
+3. Other tools: MacTex
 
 # Compiling Codes
+```{}
 devtools::install_github("hadley/sloop")  
 devtools::install_github("hadley/emo")  
 bookdown::render_book("index.Rmd", output_format = "bookdown::pdf_book")
+```
+
 
 # Problems and solutions
-## Problem 1
+## Problem 1: Lacking of packages
 ### Description
-Error in loadNamespace(name) : there is no package called `bookdown`.  
-
-### Solution
-Download package `bookdown`.
-
-## Problem 2
-### Description
-Error in Rscript_render(f, render_args, render_meta, add1, add2): Failed to compile 'Introduction.Rmd'.  
-
-### Solution
-I Opened the file 'Introduction.Rmd' and then found out that I need to install a required package `dplyr`.
-
-## Problem 3
-### Description
-Error in Rscript_render(f, render_args, render_meta, add1, add2) : Failed to compile 'Names-values.Rmd'.  
-
-### Solution
-I Opened the file 'Introduction.Rmd' and then found out that I need to install a required package `lobstr`.
-
-## Problem 3
-### Description
-Error in Rscript_render(f, render_args, render_meta, add1, add2): Failed to compile 'R6.Rmd'.  
-
-### Solution
-I Opened the file 'R6.Rmd' and then found out that I need to install required packages `DBI` and `RSQLite`.
-
-## Problem 4
-### Description
+1. Error in loadNamespace(name) : there is no package called `bookdown`.  
+2. Error in Rscript_render(f, render_args, render_meta, add1, add2): Failed to compile 'Introduction.Rmd'.  
+3. Error in Rscript_render(f, render_args, render_meta, add1, add2) : Failed to compile 'Names-values.Rmd'.  
+4. Error in Rscript_render(f, render_args, render_meta, add1, add2): Failed to compile 'R6.Rmd'.  
 Error in Rscript_render(f, render_args, render_meta, add1, add2): Failed to compile 'OO-tradeoffs.Rmd'.  
+5. Quitting from lines 233-234 (Perf-measure.Rmd). Error: `ggplot2` and `tidyr` must be installed to use `autoplot`.  
+6. Quitting from lines 233-234 (Perf-measure.Rmd). Error: `ggbeeswarm` must be installed to use `type = "beeswarm"` option.  
 
 ### Solution
-I Opened the file 'R6.Rmd' and then found out that I need to install a required package `zeallot`.
+I Downloaded packages named `bookdown`, `dplyr`, `lobstr`, `RSQLite`, `zeallot`, `bench`, `profvis`, `ggplot2`, `tidyr` and `ggbeeswarm`.
 
-## Problem 5
+## Problem 2: Packages too old.
 ### Description
-Quitting from lines 209-221 (Big-picture.Rmd).
+Quitting from lines 209-221 (Big-picture.Rmd).  
 Error: The dbplyr package is required to communicate with database backends.  
 
 ### Solution
-According to package `dplyr`'s documentation, as of dplyr 0.6.0, a number of databse and SQL functions moved from `dplyr` to `dbplyr`. Thus, I install the package 'dbplyr' and the problem solved.
+According to package `dplyr`'s documentation, as of dplyr 0.6.0, a number of database and SQL functions were moved from `dplyr` to `dbplyr`. Thus, I installed the package `dbplyr` instead and then the problem solved.
 
-## Problem 6
+## Problem 3: Lacking of `XQuartz` in my Mac
 ### Description
-Error in Rscript_render(f, render_args, render_meta, add1, add2): Failed to compile 'Perf-measure.Rmd'.  
+Error in dev.control(displaylist = if (record) "enable" else "inhibit"): dev.control() called without an open graphics device
 
 ### Solution
-I Opened the file 'Perf-measure.Rmd' and then found out that I need to install required packages 'bench' and `profvis`.
+To solve this problem in MacOS, one should install `XQuartz`. If you have `Homebrew` installed in your Mac, run the code
+```{}
+brew cask install xquartz
+```
+in the Terminal. If not, one may run the code
+```{}
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
+```
+in the Terminal to install `Homebrew` first.
 
-## Problem 7
+## Problem 4: Lacking of fonts.
 ### Description
-Quitting from lines 233-234 (Perf-measure.Rmd).
-Error: `ggplot2` and `tidyr` must be installed to use `autoplot`.  
+1. ! Package fontspec Error: The font "Inconsolata" cannot be found.  
+2. ! Package fontspec Error: The font "Andale-Mono" cannot be found.  
 
 ### Solution
-I Installed packages `ggplot2` and `tidyr`.
+I downloaded the font "Inconsolata" from `https://fonts.google.com/specimen/Inconsolataand` and "Andale-Mono" from `https://www.cufonfonts.com/font/andale-mono` and installed them to my Mac.
 
-## Problem 8
+## Problem 5: Environment not found.
 ### Description
-Quitting from lines 233-234 (Perf-measure.Rmd). 
-Error: `ggbeeswarm` must be installed to use `type = "beeswarm"` option.  
+Environment sidebar undefined.  
 
 ### Solution
-I Installed package `ggbeeswarm`.
+I updated rmarkdown from github instead of cran using code
+```{}
+remotes::install_github('rstudio/rmarkdown')
+```
+and the problem solved.  
 
-## Problem 9
-### Description
-! Package fontspec Error: The font "Inconsolata" cannot be found.  
-
-### Solution
-1. I installed the font in 'https://fonts.google.com/specimen/Inconsolata' and reinstall he package `fontspec` in MikeTex but the problem still remained. I thought the problem may caused by MikeTex or Windows system. Thus, I tried Texlive instead. After I put the '.ttf' file of the font 'Incosolata' into the doument: `C:\texlive\2020\texmf-dist\fonts\truetype\public\Incosolata`, the problem solved.
-
-## Problem 10
-### Description
-! Package fontspec Error: The font "Andale Mono" cannot be found.  
-
-### Solution
-I did the same thing as solving problem 9.
-
-## Finally, .pdf file successfully compiled.
+# Result
+Finally, the book named '_main.pdf' was successfully compiled but there were still some warnings shown in the log.
+```{r pressure, echo=FALSE, fig.cap="Warnings", out.width = '100%'}
+knitr::include_graphics("Warnings.png")
+```
 
 
 
